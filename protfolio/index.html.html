@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Akshat Kaushik — V4 Portfolio</title>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Poppins}
+
+body{
+background:linear-gradient(135deg,#050505,#0f0f0f,#151515);
+color:#f3e7c2;
+overflow-x:hidden;
+}
+
+/* glow bg */
+.glow{
+position:fixed;
+width:600px;
+height:600px;
+border-radius:50%;
+filter:blur(140px);
+background:#d4af37;
+opacity:.18;
+animation:move 25s infinite linear;
+}
+@keyframes move{
+0%{transform:translate(-100px,-100px)}
+50%{transform:translate(200px,120px)}
+100%{transform:translate(-100px,-100px)}
+}
+
+/* NAV */
+nav{
+position:sticky; top:0;
+display:flex; justify-content:center; gap:24px;
+padding:16px;
+background:rgba(0,0,0,.7);
+backdrop-filter:blur(10px);
+border-bottom:1px solid #3a2f12;
+z-index:10;
+}
+nav button{
+background:none;
+border:1px solid #3a2f12;
+color:#d4af37;
+padding:8px 14px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+nav button:hover{
+box-shadow:0 0 14px #d4af37;
+transform:translateY(-2px);
+}
+
+/* CARDS */
+.card{
+width:92%;
+max-width:1100px;
+margin:36px auto;
+padding:36px;
+border-radius:22px;
+background:rgba(18,18,18,.85);
+border:1px solid #3a2f12;
+box-shadow:0 0 40px rgba(212,175,55,.15);
+animation:fade .6s ease;
+}
+@keyframes fade{
+from{opacity:0; transform:translateY(25px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+h1{
+font-size:42px;
+background:linear-gradient(90deg,#ffd700,#fff2a8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+h2{color:#ffd700;margin-bottom:18px}
+
+.btn{
+display:inline-block;
+padding:10px 18px;
+border-radius:12px;
+border:1px solid #d4af37;
+color:#ffd700;
+margin-top:12px;
+cursor:pointer;
+background:none;
+transition:.3s;
+}
+.btn:hover{
+background:#d4af37;
+color:#000;
+box-shadow:0 0 18px #ffd700;
+}
+
+/* HERO */
+.heroWrap{
+display:grid;
+grid-template-columns:220px 1fr;
+gap:30px;
+align-items:center;
+}
+.avatar{
+width:200px;height:200px;
+border-radius:50%;
+padding:6px;
+background:linear-gradient(135deg,#ffd700,#d4af37,#fff2a8);
+box-shadow:0 0 30px rgba(255,215,0,.35);
+}
+.avatar img{
+width:100%;height:100%;
+object-fit:cover;
+border-radius:50%;
+border:4px solid #000;
+}
+
+/* STATS */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-top:20px;
+}
+.stat{
+text-align:center;
+padding:18px;
+border:1px solid #3a2f12;
+border-radius:16px;
+}
+
+/* SKILLS */
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:18px;
+}
+.skill{
+padding:18px;
+border:1px solid #3a2f12;
+border-radius:16px;
+}
+.skill i{font-size:36px;color:#ffd700}
+.bar{
+height:8px;background:#222;border-radius:10px;margin-top:8px;
+}
+.fill{
+height:100%;
+background:linear-gradient(90deg,#d4af37,#ffd700);
+}
+
+/* PROJECT */
+.project{
+padding:20px;
+border:1px solid #3a2f12;
+border-radius:16px;
+margin-bottom:16px;
+cursor:pointer;
+transition:.3s;
+}
+.project:hover{
+transform:scale(1.03);
+box-shadow:0 0 20px rgba(255,215,0,.3);
+}
+
+/* MODAL */
+.modal{
+position:fixed; inset:0;
+background:rgba(0,0,0,.8);
+display:flex; align-items:center; justify-content:center;
+}
+.modalBox{
+background:#111;
+border:1px solid #d4af37;
+padding:30px;
+border-radius:18px;
+width:90%; max-width:600px;
+}
+
+/* TIMELINE */
+.timeline{border-left:3px solid #d4af37;padding-left:18px;}
+.point{margin-bottom:20px}
+
+/* FORM */
+.formGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-top:20px;
+}
+.formGrid input,.formGrid textarea{
+width:100%;
+padding:12px;
+background:#0f0f0f;
+border:1px solid #3a2f12;
+border-radius:10px;
+color:#f3e7c2;
+}
+.formGrid textarea{grid-column:span 2;min-height:120px;}
+.success{margin-top:14px;color:#ffd700;font-weight:600;}
+
+a{color:#ffd700}
+footer{text-align:center;padding:30px;opacity:.7}
+
+@media(max-width:700px){
+.heroWrap{grid-template-columns:1fr;text-align:center}
+.avatar{margin:auto}
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+<div id="root"></div>
+
+<script type="text/babel">
+
+function useType(texts){
+const [i,setI]=React.useState(0);
+const [txt,setTxt]=React.useState("");
+React.useEffect(()=>{
+let t=texts[i]; let j=0;
+const inter=setInterval(()=>{
+setTxt(t.slice(0,j++));
+if(j>t.length){clearInterval(inter); setTimeout(()=>setI((i+1)%texts.length),1200);}
+},60);
+return ()=>clearInterval(inter);
+},[i]);
+return txt;
+}
+
+function Home(){
+const role = useType([
+"Machine Learning Engineer",
+"Research Author",
+"Full Stack Developer",
+"Data Analytics Specialist"
+]);
+
+return(
+<div className="card">
+
+<div className="heroWrap">
+<div className="avatar">
+<img src="profile.jpeg"/>
+</div>
+
+<div>
+<h1>Akshat Kaushik</h1>
+<h3>{role}</h3>
+<p>B.Tech CSE — MRIIRS • ML Intern — YBI Foundation • Patent Holder</p>
+<a className="btn" href="https://github.com/Ak-270704" target="_blank">GitHub</a>
+</div>
+</div>
+
+<div className="stats">
+<div className="stat"><h2>2+</h2>ML Projects</div>
+<div className="stat"><h2>1</h2>Research Papers</div>
+<div className="stat"><h2>250+</h2>Designs</div>
+<div className="stat"><h2>1</h2>Patent</div>
+</div>
+
+</div>
+);
+}
+
+const skillData=[
+["devicon-python-plain","Python",90],
+["devicon-react-original","React",80],
+["devicon-nodejs-plain","Node",75],
+["devicon-java-plain","Java",70],
+["devicon-mongodb-plain","MongoDB",70],
+["devicon-cplusplus-plain","C++",75]
+];
+
+function Skills(){
+return(
+<div className="card">
+<h2>Skills</h2>
+<div className="skills">
+{skillData.map(s=>(
+<div className="skill">
+<i className={s[0]}></i>
+<b>{s[1]}</b>
+<div className="bar"><div className="fill" style={{width:s[2]+"%"}}></div></div>
+</div>
+))}
+</div>
+</div>
+);
+}
+
+function Projects(){
+const [open,setOpen]=React.useState(null);
+const data=[
+{name:"ATM Cash Forecast",desc:"ML demand prediction using regression & EDA."},
+{name:"E-Commerce EDA",desc:"Data cleaning + modeling pipeline."}
+];
+
+return(
+<div className="card">
+<h2>Projects</h2>
+{data.map(p=>(
+<div className="project" onClick={()=>setOpen(p)}>
+<h3>{p.name}</h3>
+<p>{p.desc}</p>
+</div>
+))}
+
+{open && (
+<div className="modal" onClick={()=>setOpen(null)}>
+<div className="modalBox" onClick={e=>e.stopPropagation()}>
+<h2>{open.name}</h2>
+<p>{open.desc}</p>
+<button className="btn" onClick={()=>setOpen(null)}>Close</button>
+</div>
+</div>
+)}
+</div>
+);
+}
+
+function Experience(){
+return(
+<div className="card">
+<h2>Experience</h2>
+<div className="timeline">
+<div className="point"><b>ML Intern — YBI Foundation</b></div>
+<div className="point"><b>Research Author & Patent Holder</b></div>
+<div className="point"><b>Design Lead</b></div>
+</div>
+</div>
+);
+}
+
+function Contact(){
+const [form,setForm]=React.useState({name:"",email:"",company:"",message:""});
+const [sent,setSent]=React.useState(false);
+
+function change(e){setForm({...form,[e.target.name]:e.target.value});}
+function submit(e){e.preventDefault(); console.log(form); setSent(true);}
+
+return(
+<div className="card">
+<h2>Contact & Recruiter Queries</h2>
+
+<p>Email: official.akshat.kaushik@gmail.com</p>
+<p><a href="https://www.linkedin.com/in/aksshat-kausshik-b6672625a/" target="_blank">LinkedIn</a></p>
+<p><a href="https://github.com/Ak-270704" target="_blank">GitHub</a></p>
+
+<form onSubmit={submit} className="formGrid">
+<input name="name" placeholder="Your Name" required onChange={change}/>
+<input name="email" type="email" placeholder="Your Email" required onChange={change}/>
+<input name="company" placeholder="Company" onChange={change}/>
+<div></div>
+<textarea name="message" placeholder="Your Query" required onChange={change}/>
+<button className="btn">Send Message</button>
+</form>
+
+{sent && <div className="success">✅ Message captured — I will get back to you.</div>}
+</div>
+);
+}
+
+function App(){
+const [tab,setTab]=React.useState("home");
+const tabs={home:<Home/>,skills:<Skills/>,projects:<Projects/>,experience:<Experience/>,contact:<Contact/>};
+
+return(
+<>
+<nav>
+{Object.keys(tabs).map(t=>(
+<button onClick={()=>setTab(t)}>{t.toUpperCase()}</button>
+))}
+</nav>
+
+{tabs[tab]}
+<footer>© Akshat Kaushik — V4 Portfolio</footer>
+</>
+);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+
+</body>
+</html>
