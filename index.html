@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akshat Kaushik — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #1D9E75;
+      --teal-dark: #0F6E56;
+      --teal-light: #E1F5EE;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --text-faint: #a0a0a0;
+      --border: rgba(0,0,0,0.09);
+      --bg: #fafaf8;
+      --white: #ffffff;
+      --card-bg: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      border-bottom: 0.5px solid var(--border);
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 17px; letter-spacing: 0.01em; }
+    .nav-links { display: flex; gap: 2rem; font-size: 13px; color: var(--text-muted); }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* HERO */
+    .hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 6rem 3rem 4rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center;
+      font-size: 12px; font-weight: 500;
+      background: var(--teal-light); color: var(--teal-dark);
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 1.5rem; letter-spacing: 0.04em;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.08;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-name em { font-style: italic; color: var(--teal); }
+    .hero-tagline {
+      font-size: 18px; color: var(--text-muted);
+      font-weight: 300; margin-bottom: 1.5rem;
+    }
+    .hero-desc {
+      font-size: 15px; color: var(--text-muted);
+      max-width: 520px; margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+      padding: 9px 20px; border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white); color: var(--text);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn:hover { border-color: rgba(0,0,0,0.2); background: #f5f5f3; }
+    .btn-primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .btn-primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+
+    /* SECTIONS */
+    .section { max-width: 900px; margin: 0 auto; padding: 3.5rem 3rem; }
+    hr.divider { border: none; border-top: 0.5px solid var(--border); }
+    .section-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-faint); margin-bottom: 2rem; font-weight: 500;
+    }
+
+    /* EXPERIENCE */
+    .exp-item { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+    .exp-track { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 4px; }
+    .exp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    .exp-line { flex: 1; width: 1px; background: var(--border); margin-top: 6px; }
+    .exp-body { padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); flex: 1; }
+    .exp-body:last-child { border-bottom: none; }
+    .exp-meta { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .exp-role { font-size: 15px; font-weight: 500; }
+    .exp-company { font-size: 13px; color: var(--teal); margin-top: 1px; }
+    .exp-date { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+    .exp-bullets { padding-left: 1rem; margin-top: 6px; }
+    .exp-bullets li { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; line-height: 1.65; }
+    .edu-list { display: flex; flex-direction: column; gap: 0; }
+    .edu-item { padding: 1rem 0; border-bottom: 0.5px solid var(--border); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-degree { font-size: 14px; font-weight: 500; }
+    .edu-school { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .edu-meta { font-size: 12px; color: var(--text-faint); margin-top: 4px; display: flex; gap: 1rem; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .project-card {
+      background: var(--card-bg); border: 0.5px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+    .project-icon { font-size: 22px; margin-bottom: 12px; }
+    .project-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .project-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tech-pill {
+      font-size: 11px; padding: 2px 9px; border-radius: 20px;
+      background: #f0f0ee; color: var(--text-muted);
+    }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .skill-group-name { font-size: 12px; color: var(--text-faint); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.07em; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill {
+      font-size: 12px; padding: 4px 12px; border-radius: 20px;
+      border: 0.5px solid var(--border); color: var(--text-muted);
+      background: var(--white);
+    }
+
+    /* CERTS */
+    .cert-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 10px 0; border-bottom: 0.5px solid var(--border);
+      flex-wrap: wrap; gap: 6px;
+    }
+    .cert-row:last-child { border-bottom: none; }
+    .cert-name { font-size: 13px; font-weight: 500; }
+    .cert-issuer { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .cert-date { font-size: 11px; color: var(--text-faint); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    .contact-card {
+      background: #f2f2f0; border-radius: 10px;
+      padding: 1rem 1.1rem; text-align: center;
+    }
+    .contact-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+    .contact-value { font-size: 13px; font-weight: 500; word-break: break-all; }
+    .contact-value.open { color: var(--teal); }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem;
+      font-size: 12px; color: var(--text-faint);
+      border-top: 0.5px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero, .section { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .hero { padding-top: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Akshat Kaushik</span>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-in" id="about">
+  <div class="hero-badge"><span class="nav-dot"></span>Open to opportunities</div>
+  <h1 class="hero-name">Akshat <em>Kaushik</em></h1>
+  <p class="hero-tagline">Software Developer &amp; Machine Learning Engineer</p>
+  <p class="hero-desc">B.Tech CSE student at Manav Rachna International Institute of Research and Studies. I build intelligent systems, full-stack applications, and data-driven solutions.</p>
+  <div class="cta-row">
+    <a href="mailto:official.akshat.kaushik@gmail.com"><button class="btn btn-primary">Get in touch</button></a>
+    <a href="https://github.com/" target="_blank"><button class="btn">GitHub ↗</button></a>
+    <a href="https://linkedin.com/in/" target="_blank"><button class="btn">LinkedIn ↗</button></a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- EXPERIENCE + EDUCATION -->
+<div class="section fade-in" id="experience">
+  <div class="section-label">Experience</div>
+  <div class="exp-item">
+    <div class="exp-track">
+      <div class="exp-dot"></div>
+      <div class="exp-line"></div>
+    </div>
+    <div class="exp-body">
+      <div class="exp-meta">
+        <div>
+          <div class="exp-role">Machine Learning Intern</div>
+          <div class="exp-company">YBI Foundation</div>
+        </div>
+        <div class="exp-date">Jun 2025 – Aug 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed supervised and unsupervised learning models for multiple datasets, improving team efficiency by 15%.</li>
+        <li>Conducted data preprocessing, visualization, and model evaluation across cross-functional project teams.</li>
+        <li>Delivered end-to-end ML solutions in real-world projects, strengthening analytical expertise.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top: 2rem;">Education</div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+      <div class="edu-school">Manav Rachna International Institute of Research and Studies</div>
+      <div class="edu-meta"><span>Faridabad, Haryana</span><span>2023 – 2027</span></div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-degree">Senior Secondary (12th Std)</div>
+      <div class="edu-school">Modern Vidya Niketan, Aravali Hills</div>
+      <div class="edu-meta"><span>Faridabad, Haryana</span><span>2022</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<div class="section fade-in" id="projects">
+  <div class="section-label">Projects</div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <div class="project-title">ATM Cash Demand Forecast — BankServe</div>
+      <div class="project-desc">Forecasting model to predict ATM cash demand across a branch network. Applied EDA and Linear Regression on multi-year transaction data, reducing turnaround time by 20%.</div>
+      <div class="tech-pills">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Pandas</span>
+        <span class="tech-pill">NumPy</span>
+        <span class="tech-pill">Scikit-learn</span>
+        <span class="tech-pill">Matplotlib</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">📈</div>
+      <div class="project-title">Business Data Insights</div>
+      <div class="project-desc">Interactive dashboards and automated reports for multiple business units using advanced Excel tools, achieving consistent quality benchmarks across teams.</div>
+      <div class="tech-pills">
+        <span class="tech-pill">Excel</span>
+        <span class="tech-pill">Pivot Tables</span>
+        <span class="tech-pill">VLOOKUP</span>
+        <span class="tech-pill">Charts</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<div class="section fade-in" id="skills">
+  <div class="section-label">Skills</div>
+  <div class="skills-grid">
+    <div>
+      <div class="skill-group-name">Languages</div>
+      <div class="pills">
+        <span class="pill">Python</span><span class="pill">Java</span><span class="pill">C++</span><span class="pill">JavaScript</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-name">Web development</div>
+      <div class="pills">
+        <span class="pill">React.js</span><span class="pill">Node.js</span><span class="pill">Express.js</span><span class="pill">Angular</span><span class="pill">HTML</span><span class="pill">CSS</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-name">Machine learning</div>
+      <div class="pills">
+        <span class="pill">Scikit-learn</span><span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Matplotlib</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-name">Databases</div>
+      <div class="pills">
+        <span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">Oracle DB</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-name">Tools</div>
+      <div class="pills">
+        <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">IntelliJ</span><span class="pill">Eclipse</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-name">Core concepts</div>
+      <div class="pills">
+        <span class="pill">DSA</span><span class="pill">OOPs</span><span class="pill">DBMS</span><span class="pill">OS</span><span class="pill">CN</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<div class="section fade-in">
+  <div class="section-label">Certifications</div>
+  <div class="cert-row">
+    <div><div class="cert-name">Leadership Foundations</div><div class="cert-issuer">LinkedIn Learning</div></div>
+    <div class="cert-date">2025</div>
+  </div>
+  <div class="cert-row">
+    <div><div class="cert-name">Problem-Solving Techniques</div><div class="cert-issuer">LinkedIn Learning</div></div>
+    <div class="cert-date">2025</div>
+  </div>
+  <div class="cert-row">
+    <div><div class="cert-name">Computer Architecture Essentials</div><div class="cert-issuer">LinkedIn Learning</div></div>
+    <div class="cert-date">2025</div>
+  </div>
+  <div class="cert-row">
+    <div><div class="cert-name">The AI Edge for Entrepreneurs</div><div class="cert-issuer">LinkedIn Learning</div></div>
+    <div class="cert-date">2025</div>
+  </div>
+  <div class="cert-row">
+    <div><div class="cert-name">HTML and CSS</div><div class="cert-issuer">Great Learning</div></div>
+    <div class="cert-date">Mar 2024</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<div class="section fade-in" id="contact" style="padding-bottom: 4rem;">
+  <div class="section-label">Contact</div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-label">Email</div>
+      <div class="contact-value" style="font-size:11.5px;">official.akshat.kaushik@gmail.com</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-label">Phone</div>
+      <div class="contact-value">+91 9717500643</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-label">Location</div>
+      <div class="contact-value">Faridabad, Haryana</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-label">Status</div>
+      <div class="contact-value open">Open to work</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Built by Akshat Kaushik &nbsp;·&nbsp; 2025
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.fade-in');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
